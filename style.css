@@ -129,3 +129,11 @@ footer {
     padding: 24px;
   }
 }
+.paper a {
+  color: #5d3f86;
+  text-decoration: none;
+}
+
+.paper a:hover {
+  text-decoration: underline;
+}
