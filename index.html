@@ -1,148 +1,703 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <link rel="stylesheet" href="style.css">
-  <meta charset="UTF-8">
-  <title>CARIBOU Project</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyecto CARIBOU – Ruta de atención integrada para la depresión adolescente en Chile</title>
+  <meta name="description" content="Evaluación de la aceptabilidad, factibilidad y exploración de la eficacia de la ruta de atención integrada CARIBOU para la depresión adolescente en atención primaria en Chile. ANID FONDECYT Regular Nº 1261819." />
+  <meta property="og:title" content="Proyecto CARIBOU – Ruta de atención integrada para la depresión adolescente en Chile" />
+  <meta property="og:description" content="Evaluación de la aceptabilidad, factibilidad y exploración de la eficacia de la ruta de atención integrada CARIBOU para la depresión adolescente en atención primaria en Chile. ANID FONDECYT Regular Nº 1261819." />
+  <meta property="og:type" content="website" />
   <style>
+    :root {
+      --primary: #0f5257;
+      --primary-light: #16787f;
+      --accent: #2e7d32;
+      --accent-light: #66bb6a;
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #212529;
+      --text-muted: #6c757d;
+      --border: #dee2e6;
+      --hero-bg: #08363a;
+      --badge-bg: #e8f5e9;
+      --hero-accent: #3fa796;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
 
-</style>
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--hero-bg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem; height: 58px;
+    }
+    .nav-brand {
+      font-weight: 700; font-size: 1.1rem; color: #fff; text-decoration: none;
+    }
+    .nav-brand span { color: var(--hero-accent); }
+    .nav-links { display: flex; gap: 0.2rem; align-items: center; }
+    .nav-links a {
+      color: rgba(255,255,255,0.82); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.02em;
+      padding: 0.35rem 0.65rem; border-radius: 4px; transition: all 0.18s;
+    }
+    .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.12); }
+    .lang-btn {
+      background: var(--hero-accent); color: #fff !important;
+      border-radius: 4px; padding: 0.3rem 0.75rem !important;
+      font-weight: 600 !important; margin-left: 0.6rem;
+      cursor: pointer; border: none; font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+    .lang-btn:hover { background: var(--accent-light) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: 0.3s; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--hero-bg) 0%, #0d4a4e 60%, #1b5e20 100%);
+      color: #fff; padding: 5rem 1.5rem 4rem;
+      text-align: center;
+    }
+    .hero-tag {
+      display: inline-block; background: rgba(102,187,106,0.18);
+      border: 1px solid var(--hero-accent); color: var(--accent-light);
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.3rem 0.9rem;
+      border-radius: 20px; margin-bottom: 1.4rem;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 0.6rem; }
+    .hero h1 span { color: var(--accent-light); }
+    .hero-sub { font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: rgba(255,255,255,0.78); margin-bottom: 2rem; font-weight: 400; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2.5rem; }
+    .hero-pill {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 30px; padding: 0.45rem 1.2rem;
+      font-size: 0.85rem; color: rgba(255,255,255,0.9);
+    }
+    .hero-pill strong { color: #fff; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 0.7rem 1.8rem;
+      border-radius: 6px; text-decoration: none; font-weight: 600;
+      font-size: 0.92rem; transition: all 0.18s;
+    }
+    .btn-primary { background: var(--hero-accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+    /* ── SECTIONS ── */
+    section { padding: 4.5rem 1.5rem; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+    .section-alt { background: #fff; }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800;
+      color: var(--primary); margin-bottom: 0.4rem;
+    }
+    .section-subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2.5rem; }
+    .title-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.4rem; }
+    .title-bar::after { content: ''; flex: 1; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
+    p { margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .stat-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card {
+      background: var(--hero-bg); color: #fff;
+      border-radius: 10px; padding: 1.2rem; text-align: center;
+    }
+    .stat-card .num { font-size: 2rem; font-weight: 800; color: var(--accent-light); }
+    .stat-card .lbl { font-size: 0.78rem; color: rgba(255,255,255,0.75); margin-top: 0.2rem; }
+
+    /* ── OBJECTIVES ── */
+    .obj-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .obj-list li {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: #fff; border-radius: 10px; padding: 1.2rem 1.4rem;
+      border-left: 4px solid var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .obj-num {
+      background: var(--primary); color: #fff;
+      border-radius: 50%; width: 28px; height: 28px; min-width: 28px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.82rem;
+    }
+
+    /* ── METHODOLOGY ── */
+    .method-phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-bottom: 2.5rem; }
+    .phase-card {
+      background: #fff; border-radius: 12px; padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 4px solid var(--primary-light);
+    }
+    .phase-card.accent-border { border-top-color: var(--accent); }
+    .phase-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+    .phase-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+    .phase-card p { font-size: 0.88rem; color: var(--text-muted); margin: 0; }
+    .program-structure {
+      background: linear-gradient(135deg, var(--hero-bg), #1b5e20);
+      color: #fff; border-radius: 14px; padding: 2rem;
+    }
+    .program-structure h3 { margin-bottom: 1rem; color: var(--accent-light); font-size: 1.1rem; }
+    .sessions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .session-block { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; text-align: center; }
+    .session-block .s-num { font-size: 1.6rem; font-weight: 800; color: var(--accent-light); }
+    .session-block .s-lbl { font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 0.3rem; }
+    .trial-info { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+    .trial-box { background: #fff; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    .trial-box h4 { color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .trial-box p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+    /* ── TEAM ── */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
+    .team-card {
+      background: #fff; border-radius: 14px; padding: 1.8rem 1.2rem;
+      text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .team-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.11); }
+    .team-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.5rem; font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+    .team-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.3rem; }
+    .team-card .role { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-bottom: 0.3rem; }
+    .team-card .inst { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ── RESULTS ── */
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+    .result-card {
+      background: #fff; border-radius: 12px; padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 4px solid var(--accent);
+    }
+    .result-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; }
+    .result-stat { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.6rem; }
+    .result-stat .pct { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+    .result-stat .desc { font-size: 0.82rem; color: var(--text-muted); }
+    .efficacy-table {
+      width: 100%; border-collapse: collapse; font-size: 0.88rem;
+    }
+    .efficacy-table th {
+      background: var(--primary); color: #fff; padding: 0.7rem 1rem;
+      text-align: left; font-weight: 600;
+    }
+    .efficacy-table td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); }
+    .efficacy-table tr:last-child td { border-bottom: none; }
+    .efficacy-table tr:nth-child(even) td { background: #f8f9fa; }
+    .sig { color: var(--accent); font-weight: 700; }
+    .table-wrap { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .pub-card {
+      background: #fff; border-radius: 12px; padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-left: 5px solid var(--primary-light);
+      transition: border-color 0.18s;
+    }
+    .pub-card:hover { border-left-color: var(--accent); }
+    .pub-year { font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .pub-title { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; line-height: 1.35; }
+    .pub-authors { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .pub-journal { font-size: 0.85rem; color: var(--text); font-style: italic; margin-bottom: 0.8rem; }
+    .pub-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--primary-light); font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; transition: color 0.18s;
+    }
+    .pub-link:hover { color: var(--accent); }
+    .pub-badge {
+      display: inline-block; background: var(--badge-bg); color: var(--accent);
+      font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem;
+      border-radius: 10px; margin-left: 0.5rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .contact-info p { margin-bottom: 0.8rem; }
+    .contact-info a { color: var(--primary-light); text-decoration: none; }
+    .contact-info a:hover { color: var(--accent); }
+    .contact-detail { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 1rem; }
+    .c-icon { font-size: 1.1rem; margin-top: 0.1rem; }
+    .funding-box {
+      background: #fff; border-radius: 12px; padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid var(--primary);
+    }
+    .funding-box h3 { color: var(--primary); margin-bottom: 1rem; font-size: 0.95rem; }
+    .funder-row { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.7rem; font-size: 0.88rem; }
+    .funder-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--hero-bg); color: rgba(255,255,255,0.65);
+      text-align: center; padding: 2rem 1.5rem; font-size: 0.82rem;
+    }
+    footer a { color: var(--accent-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0; background: var(--hero-bg); padding: 1rem; gap: 0.4rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .sessions-grid { grid-template-columns: 1fr; }
+      .trial-info { grid-template-columns: 1fr; }
+      .stat-cards { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── CARDS (manuales / proyectos) ── */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; }
+    .info-card {
+      background: #fff; border-radius: 12px; padding: 1.4rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 4px solid var(--primary-light);
+      display: flex; flex-direction: column; gap: 0.45rem;
+    }
+    .info-card.accent-border { border-top-color: var(--accent); }
+    .info-card .kicker { font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+    .info-card h3 { font-size: 0.98rem; font-weight: 700; color: var(--primary); line-height: 1.35; }
+    .info-card p { font-size: 0.87rem; color: var(--text-muted); margin: 0; }
+    .info-card .meta { font-size: 0.8rem; color: var(--text); margin-top: auto; padding-top: 0.4rem; border-top: 1px solid var(--border); }
+    .status { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.55rem; border-radius: 10px; margin-left: 0.3rem; vertical-align: middle; }
+    .status-done { background: var(--badge-bg); color: var(--accent); }
+    .status-now { background: #fff3e0; color: #b7410e; }
+    .timeline { list-style: none; border-left: 3px solid var(--accent); margin-left: 0.6rem; padding-left: 1.4rem; display: flex; flex-direction: column; gap: 1.4rem; }
+    .timeline li { position: relative; }
+    .timeline li::before { content: ''; position: absolute; left: -2.05rem; top: 0.35rem; width: 13px; height: 13px; border-radius: 50%; background: var(--primary); border: 3px solid var(--bg); }
+    .timeline .when { font-size: 0.78rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
+    .timeline h3 { font-size: 1rem; color: var(--primary); margin: 0.15rem 0 0.35rem; line-height: 1.35; }
+    .timeline p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+    .note { font-size: 0.82rem; color: var(--text-muted); margin-top: 1.4rem; }
+    .pub-group { font-size: 1rem; font-weight: 700; color: var(--primary); margin: 0 0 1rem; }
+    .pub-list + .pub-group { margin-top: 2.2rem; }
+
+
+    .collab-wrap { margin-top: 2.5rem; }
+    .collab-title { font-size: 1.1rem; color: var(--primary); margin-bottom: 0.2rem; }
+    .collab-sub { font-size: 0.78rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.6rem; }
+    .collab-box { margin-top: 1rem; background: var(--bg); border-left: 4px solid var(--accent); border-radius: 10px; padding: 1.4rem 1.6rem; }
+    .collab-box h3 { font-size: 1rem; color: var(--primary); margin-bottom: 0.15rem; }
+    .collab-box p { font-size: 0.92rem; margin: 0; }
+    .collab-box a { color: var(--primary-light); }
+    .section-alt .collab-box { background: #f4f7f7; }
+    .nav-brand, .nav-links a { white-space: nowrap; }
+    @media (max-width: 900px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0; background: var(--hero-bg); padding: 1rem; gap: 0.4rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+    }
+  </style>
 </head>
 <body>
-  <nav>
-  <a href="index.html">Home</a>
-  <a href="project.html">Project</a>
-  <a href="intervention.html">Intervention</a>
-  <a href="team.html">Team</a>
-  <a href="publications.html">Publications</a>
-  <a href="index-es.html">Español</a>
+
+<!-- ════════════════ NAV ════════════════ -->
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#inicio"><span>CARIBOU</span> Chile</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#sobre" data-es="Sobre el Proyecto" data-en="About">Sobre el Proyecto</a>
+      <a href="#intervencion" data-es="La Intervención" data-en="Intervention">La Intervención</a>
+      <a href="#estudio" data-es="El Estudio" data-en="The Study">El Estudio</a>
+      <a href="#equipo" data-es="Equipo" data-en="Team">Equipo</a>
+      <a href="#publicaciones" data-es="Publicaciones" data-en="Publications">Publicaciones</a>
+      <a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a>
+      <button class="lang-btn" id="langToggle" onclick="toggleLang()" aria-label="Switch language">EN</button>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </nav>
-<div style="text-align:right; padding:10px 20px;">
-  <a href="index-es.html">Español</a>
-</div>
-<header>
-  <h1>CARIBOU Project</h1>
-  <p>
-    Evaluation of the acceptability, feasibility and exploratory efficacy of an 
-    Integrated Care Pathway for adolescent depression in primary care in Chile.
-  </p>
-  <div class="badge">FONDECYT Regular Grant Nº1261819</div>
-</header>
 
-<main>
+<!-- ════════════════ HERO ════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-tag" data-es="Ruta de atención integrada · Depresión adolescente" data-en="Integrated care pathway · Adolescent depression">Ruta de atención integrada · Depresión adolescente</div>
+  <h1 data-es="Proyecto CARIBOU" data-en="CARIBOU Project">Proyecto CARIBOU</h1>
+  <p class="hero-sub" data-es="Evaluación de la aceptabilidad, la factibilidad y exploración de la eficacia de una ruta de atención integrada para la depresión adolescente en la atención primaria en Chile" data-en="Evaluation of the acceptability, feasibility and exploratory efficacy of an integrated care pathway for adolescent depression in primary care in Chile">Evaluación de la aceptabilidad, la factibilidad y exploración de la eficacia de una ruta de atención integrada para la depresión adolescente en la atención primaria en Chile</p>
+  <div class="hero-meta">
+    <div class="hero-pill"><strong>ANID</strong> · FONDECYT Regular Nº 1261819 · 2026–2031</div>
+    <div class="hero-pill"><span data-es="&lt;strong&gt;Ensayo piloto&lt;/strong&gt; · cRCT con 72 adolescentes" data-en="&lt;strong&gt;Pilot trial&lt;/strong&gt; · cRCT with 72 adolescents"><strong>Ensayo piloto</strong> · cRCT con 72 adolescentes</span></div>
+    <div class="hero-pill"><span data-es="&lt;strong&gt;Investigador responsable&lt;/strong&gt; · Jorge Gaete" data-en="&lt;strong&gt;Principal investigator&lt;/strong&gt; · Jorge Gaete"><strong>Investigador responsable</strong> · Jorge Gaete</span></div>
+  </div>
+  <div class="hero-cta">
+    <a href="#sobre" class="btn btn-primary" data-es="Conocer el proyecto" data-en="Learn more">Conocer el proyecto</a>
+    <a href="#intervencion" class="btn btn-outline" data-es="Ver la intervención" data-en="See the intervention">Ver la intervención</a>
+  </div>
+</section>
 
-  <h2>Overview</h2>
-  <p>
-    Major Depressive Disorder (MDD) is a highly prevalent and disabling condition among adolescents, 
-    with significant impacts on functioning, development, and long-term outcomes. In Chile, a substantial 
-    proportion of adolescents with depression do not receive adequate or evidence-based treatment, 
-    particularly in primary care settings.
-  </p>
+<section id="sobre" class="section-alt">
+  <div class="section-inner">
+    <div class="title-bar">
+      <h2 class="section-title" data-es="Sobre el Proyecto" data-en="About the Project">Sobre el Proyecto</h2>
+    </div>
+    <p class="section-subtitle" data-es="Depresión adolescente y atención primaria en Chile" data-en="Adolescent depression and primary care in Chile">Depresión adolescente y atención primaria en Chile</p>
+    <div class="about-grid">
+      <div>
+        <p data-es="El &lt;strong&gt;trastorno depresivo mayor&lt;/strong&gt; es frecuente y discapacitante en la adolescencia, y se asocia a deterioro del funcionamiento, mayor riesgo suicida y consecuencias a largo plazo. En Chile afecta a cerca del 8% de los adolescentes y una parte importante de ellos no recibe tratamiento oportuno ni basado en evidencia, sobre todo en la atención primaria." data-en="&lt;strong&gt;Major depressive disorder&lt;/strong&gt; is common and disabling in adolescence, and is associated with impaired functioning, higher suicide risk and long-term consequences. In Chile it affects about 8% of adolescents, and many of them do not receive timely, evidence-based treatment, particularly in primary care.">El <strong>trastorno depresivo mayor</strong> es frecuente y discapacitante en la adolescencia, y se asocia a deterioro del funcionamiento, mayor riesgo suicida y consecuencias a largo plazo. En Chile afecta a cerca del 8% de los adolescentes y una parte importante de ellos no recibe tratamiento oportuno ni basado en evidencia, sobre todo en la atención primaria.</p>
+        <p data-es="&lt;strong&gt;CARIBOU&lt;/strong&gt; (&lt;em&gt;Care for Adolescents who Receive Information &#x27;Bout Outcomes&lt;/em&gt;) es una ruta de atención integrada desarrollada en el Centre for Addiction and Mental Health (CAMH) de Toronto. Organiza la atención de la depresión adolescente en una secuencia estructurada, multidisciplinaria y guiada por mediciones repetidas." data-en="&lt;strong&gt;CARIBOU&lt;/strong&gt; (&lt;em&gt;Care for Adolescents who Receive Information &#x27;Bout Outcomes&lt;/em&gt;) is an integrated care pathway developed at the Centre for Addiction and Mental Health (CAMH) in Toronto. It organises care for adolescent depression in a structured, multidisciplinary sequence guided by repeated measurement."><strong>CARIBOU</strong> (<em>Care for Adolescents who Receive Information 'Bout Outcomes</em>) es una ruta de atención integrada desarrollada en el Centre for Addiction and Mental Health (CAMH) de Toronto. Organiza la atención de la depresión adolescente en una secuencia estructurada, multidisciplinaria y guiada por mediciones repetidas.</p>
+        <p data-es="Este proyecto traduce y adapta CARIBOU a la realidad chilena y evalúa su aceptabilidad, su factibilidad y su eficacia exploratoria en centros de atención primaria de la Región Metropolitana." data-en="This project translates and adapts CARIBOU to the Chilean context and evaluates its acceptability, feasibility and exploratory efficacy in primary care centres in the Metropolitan Region.">Este proyecto traduce y adapta CARIBOU a la realidad chilena y evalúa su aceptabilidad, su factibilidad y su eficacia exploratoria en centros de atención primaria de la Región Metropolitana.</p>
+      </div>
+      <div>
+        <div class="stat-cards">
+          <div class="stat-card"><div class="num">72</div><div class="lbl" data-es="Adolescentes con depresión en atención primaria" data-en="Adolescents with depression in primary care">Adolescentes con depresión en atención primaria</div></div>
+          <div class="stat-card"><div class="num">24</div><div class="lbl" data-es="Semanas de seguimiento" data-en="Weeks of follow-up">Semanas de seguimiento</div></div>
+          <div class="stat-card"><div class="num">2</div><div class="lbl" data-es="Fases: trabajo formativo y evaluación" data-en="Phases: formative work and evaluation">Fases: trabajo formativo y evaluación</div></div>
+          <div class="stat-card"><div class="num">4</div><div class="lbl" data-es="Módulos de terapia cognitivo-conductual" data-en="Cognitive behavioural therapy modules">Módulos de terapia cognitivo-conductual</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <p>
-    The CARIBOU project aims to evaluate the acceptability, feasibility, and explore the efficacy of an 
-    Integrated Care Pathway (ICP) designed to improve the treatment of adolescent depression within 
-    primary care centers.
-  </p>
+<section id="intervencion">
+  <div class="section-inner">
+    <div class="title-bar">
+      <h2 class="section-title" data-es="La Intervención" data-en="The Intervention">La Intervención</h2>
+    </div>
+    <p class="section-subtitle" data-es="La ruta de atención CARIBOU, paso a paso" data-en="The CARIBOU care pathway, step by step">La ruta de atención CARIBOU, paso a paso</p>
+    <div class="card-grid">
+      <div class="info-card accent-border">
+        <div class="kicker" data-es="Paso 1" data-en="Step 1">Paso 1</div>
+        <h3 data-es="Identificación y evaluación" data-en="Identification and assessment">Identificación y evaluación</h3>
+        <p data-es="Evaluación de síntomas depresivos, diagnóstico, deterioro funcional, riesgo suicida y otras necesidades clínicas." data-en="Assessment of depressive symptoms, diagnosis, functional impairment, suicide risk and other clinical needs.">Evaluación de síntomas depresivos, diagnóstico, deterioro funcional, riesgo suicida y otras necesidades clínicas.</p>
+      </div>
+      <div class="info-card">
+        <div class="kicker" data-es="Paso 2" data-en="Step 2">Paso 2</div>
+        <h3 data-es="Bases del ánimo" data-en="Mood foundations">Bases del ánimo</h3>
+        <p data-es="Sesión psicoeducativa para adolescentes y cuidadores sobre depresión, sueño, actividad física, alimentación y expectativas del tratamiento." data-en="A psychoeducational session for adolescents and caregivers on depression, sleep, physical activity, eating and treatment expectations.">Sesión psicoeducativa para adolescentes y cuidadores sobre depresión, sueño, actividad física, alimentación y expectativas del tratamiento.</p>
+      </div>
+      <div class="info-card">
+        <div class="kicker" data-es="Paso 3" data-en="Step 3">Paso 3</div>
+        <h3 data-es="Psicoterapia" data-en="Psychotherapy">Psicoterapia</h3>
+        <p data-es="Terapia cognitivo-conductual en formato grupal o individual. Según las necesidades clínicas, puede ofrecerse una intervención psicológica breve." data-en="Cognitive behavioural therapy in group or individual format. A brief psychological intervention may be offered depending on clinical needs.">Terapia cognitivo-conductual en formato grupal o individual. Según las necesidades clínicas, puede ofrecerse una intervención psicológica breve.</p>
+      </div>
+      <div class="info-card">
+        <div class="kicker" data-es="Paso 4" data-en="Step 4">Paso 4</div>
+        <h3 data-es="Apoyo a cuidadores" data-en="Caregiver support">Apoyo a cuidadores</h3>
+        <p data-es="Sesiones para cuidadores centradas en validación, comunicación, límites, resolución de problemas y acompañamiento del adolescente con depresión." data-en="Sessions for caregivers focused on validation, communication, boundaries, problem-solving and supporting an adolescent with depression.">Sesiones para cuidadores centradas en validación, comunicación, límites, resolución de problemas y acompañamiento del adolescente con depresión.</p>
+      </div>
+      <div class="info-card">
+        <div class="kicker" data-es="Paso 5" data-en="Step 5">Paso 5</div>
+        <h3 data-es="Tratamiento farmacológico" data-en="Medication stream">Tratamiento farmacológico</h3>
+        <p data-es="En depresión moderada a severa se consideran opciones farmacológicas, con algoritmos basados en evidencia y decisiones clínicas compartidas." data-en="For moderate to severe depression, medication options are considered using evidence-based algorithms and shared clinical decision-making.">En depresión moderada a severa se consideran opciones farmacológicas, con algoritmos basados en evidencia y decisiones clínicas compartidas.</p>
+      </div>
+      <div class="info-card">
+        <div class="kicker" data-es="Paso 6" data-en="Step 6">Paso 6</div>
+        <h3 data-es="Revisión del equipo" data-en="Team reviews">Revisión del equipo</h3>
+        <p data-es="Cada cuatro semanas los adolescentes responden las mediciones de resultado y revisan sus avances con el equipo para ajustar el plan de tratamiento." data-en="Every four weeks adolescents complete outcome measures and review their progress with the team to adjust the treatment plan.">Cada cuatro semanas los adolescentes responden las mediciones de resultado y revisan sus avances con el equipo para ajustar el plan de tratamiento.</p>
+      </div>
+      <div class="info-card accent-border">
+        <div class="kicker" data-es="Paso 7" data-en="Step 7">Paso 7</div>
+        <h3 data-es="Cierre y prevención de recaídas" data-en="Completion and relapse prevention">Cierre y prevención de recaídas</h3>
+        <p data-es="Al terminar la ruta, el adolescente y el equipo acuerdan los pasos siguientes y elaboran un plan de transición y de prevención de recaídas." data-en="At the end of the pathway, the adolescent and the team agree on next steps and develop a transition and relapse prevention plan.">Al terminar la ruta, el adolescente y el equipo acuerdan los pasos siguientes y elaboran un plan de transición y de prevención de recaídas.</p>
+      </div>
+    </div>
+    <div class="collab-wrap">
+      <h3 class="collab-title" data-es="Módulos de terapia cognitivo-conductual" data-en="Cognitive behavioural therapy modules">Módulos de terapia cognitivo-conductual</h3>
+      <div class="collab-box">
+        <p data-es="&lt;strong&gt;Activación conductual:&lt;/strong&gt; aumentar actividades significativas que sostengan el ánimo. &lt;strong&gt;Reestructuración cognitiva:&lt;/strong&gt; identificar y trabajar patrones de pensamiento poco útiles. &lt;strong&gt;Habilidades de comunicación:&lt;/strong&gt; fortalecer las relaciones y la efectividad interpersonal. &lt;strong&gt;Resolución de problemas:&lt;/strong&gt; desarrollar estrategias estructuradas para los desafíos cotidianos." data-en="&lt;strong&gt;Behavioural activation:&lt;/strong&gt; increasing meaningful, mood-supporting activities. &lt;strong&gt;Cognitive restructuring:&lt;/strong&gt; identifying and working with unhelpful thinking patterns. &lt;strong&gt;Communication skills:&lt;/strong&gt; strengthening relationships and interpersonal effectiveness. &lt;strong&gt;Problem-solving:&lt;/strong&gt; developing structured strategies for everyday challenges."><strong>Activación conductual:</strong> aumentar actividades significativas que sostengan el ánimo. <strong>Reestructuración cognitiva:</strong> identificar y trabajar patrones de pensamiento poco útiles. <strong>Habilidades de comunicación:</strong> fortalecer las relaciones y la efectividad interpersonal. <strong>Resolución de problemas:</strong> desarrollar estrategias estructuradas para los desafíos cotidianos.</p>
+      </div>
+      <div class="collab-box">
+        <p data-es="&lt;strong&gt;Atención basada en mediciones.&lt;/strong&gt; Los adolescentes responden de forma repetida cuestionarios de síntomas y funcionamiento durante el tratamiento. El equipo revisa esos datos para decidir si continuar, modificar, intensificar o dar de alta." data-en="&lt;strong&gt;Measurement-based care.&lt;/strong&gt; Adolescents repeatedly complete symptom and functioning measures during treatment. The team reviews these data to decide whether to continue, modify, intensify or transition care."><strong>Atención basada en mediciones.</strong> Los adolescentes responden de forma repetida cuestionarios de síntomas y funcionamiento durante el tratamiento. El equipo revisa esos datos para decidir si continuar, modificar, intensificar o dar de alta.</p>
+      </div>
+      <div class="collab-box">
+        <p data-es="&lt;strong&gt;Adaptación cultural para Chile.&lt;/strong&gt; Los materiales de CARIBOU se traducen y adaptan para la atención primaria chilena, con participación de jóvenes y familias para ajustar el lenguaje, los ejemplos y las actividades." data-en="&lt;strong&gt;Cultural adaptation for Chile.&lt;/strong&gt; CARIBOU materials are translated and adapted for Chilean primary care, with youth and family engagement to adjust language, examples and activities."><strong>Adaptación cultural para Chile.</strong> Los materiales de CARIBOU se traducen y adaptan para la atención primaria chilena, con participación de jóvenes y familias para ajustar el lenguaje, los ejemplos y las actividades.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <hr>
+<section id="estudio" class="section-alt">
+  <div class="section-inner">
+    <div class="title-bar">
+      <h2 class="section-title" data-es="El Estudio" data-en="The Study">El Estudio</h2>
+    </div>
+    <p class="section-subtitle" data-es="Diseño, contexto y resultados que se evalúan" data-en="Design, setting and outcomes assessed">Diseño, contexto y resultados que se evalúan</p>
+    <ul class="timeline">
+      <li>
+        <div class="when" data-es="Fase 1" data-en="Phase 1">Fase 1</div>
+        <h3 data-es="Trabajo formativo" data-en="Formative work">Trabajo formativo</h3>
+        <p data-es="Traducción y adaptación cultural de los materiales de CARIBOU, con participación de jóvenes y familias mediante métodos participativos." data-en="Translation and cultural adaptation of the CARIBOU materials, with youth and family engagement through participatory methods.">Traducción y adaptación cultural de los materiales de CARIBOU, con participación de jóvenes y familias mediante métodos participativos.</p>
+      </li>
+      <li>
+        <div class="when" data-es="Fase 2" data-en="Phase 2">Fase 2</div>
+        <h3 data-es="Ensayo piloto aleatorizado por conglomerados" data-en="Pilot cluster randomised trial">Ensayo piloto aleatorizado por conglomerados</h3>
+        <p data-es="72 adolescentes con depresión, con aleatorización a nivel de centro de salud y comparación entre CARIBOU y el tratamiento habitual. El seguimiento dura 24 semanas." data-en="72 adolescents with depression, randomised at the health centre level and comparing CARIBOU with treatment as usual. Follow-up lasts 24 weeks.">72 adolescentes con depresión, con aleatorización a nivel de centro de salud y comparación entre CARIBOU y el tratamiento habitual. El seguimiento dura 24 semanas.</p>
+      </li>
+      <li>
+        <div class="when" data-es="Contexto" data-en="Setting">Contexto</div>
+        <h3 data-es="Centros de atención primaria de la Región Metropolitana" data-en="Primary care centres in the Metropolitan Region">Centros de atención primaria de la Región Metropolitana</h3>
+        <p data-es="El estudio se realiza en CESFAM de Santiago, incluidos los centros de la red ANCORA de la Pontificia Universidad Católica de Chile." data-en="The study is conducted in CESFAM primary care centres in Santiago, including those in the ANCORA network of Pontificia Universidad Católica de Chile.">El estudio se realiza en CESFAM de Santiago, incluidos los centros de la red ANCORA de la Pontificia Universidad Católica de Chile.</p>
+      </li>
+      <li>
+        <div class="when" data-es="Resultados" data-en="Outcomes">Resultados</div>
+        <h3 data-es="Qué se mide" data-en="What is measured">Qué se mide</h3>
+        <p data-es="Resultado primario: síntomas depresivos (&lt;em&gt;Mood and Feelings Questionnaire&lt;/em&gt;). Resultados secundarios: síntomas ansiosos (GAD-7), calidad de vida (KIDSCREEN-27), funcionamiento familiar (MFAD-GF) y funcionamiento global (&lt;em&gt;Columbia Impairment Scale&lt;/em&gt;). También se evalúan la aceptabilidad y la factibilidad entre adolescentes, cuidadores y profesionales." data-en="Primary outcome: depressive symptoms (&lt;em&gt;Mood and Feelings Questionnaire&lt;/em&gt;). Secondary outcomes: anxiety symptoms (GAD-7), quality of life (KIDSCREEN-27), family functioning (MFAD-GF) and global functioning (&lt;em&gt;Columbia Impairment Scale&lt;/em&gt;). Acceptability and feasibility among adolescents, caregivers and clinicians are also assessed.">Resultado primario: síntomas depresivos (<em>Mood and Feelings Questionnaire</em>). Resultados secundarios: síntomas ansiosos (GAD-7), calidad de vida (KIDSCREEN-27), funcionamiento familiar (MFAD-GF) y funcionamiento global (<em>Columbia Impairment Scale</em>). También se evalúan la aceptabilidad y la factibilidad entre adolescentes, cuidadores y profesionales.</p>
+      </li>
+      <li>
+        <div class="when" data-es="Impacto esperado" data-en="Expected impact">Impacto esperado</div>
+        <h3 data-es="Evidencia para la práctica y la política pública" data-en="Evidence for practice and policy">Evidencia para la práctica y la política pública</h3>
+        <p data-es="El proyecto aportará evidencia sobre la implementación y la posible efectividad de una ruta de atención integrada para la depresión adolescente en un contexto con recursos limitados, útil para la práctica clínica, la política pública y futuros ensayos de mayor escala en Chile y América Latina." data-en="The project will provide evidence on the implementation and potential effectiveness of an integrated care pathway for adolescent depression in a resource-constrained setting, informing clinical practice, health policy and future larger trials in Chile and Latin America.">El proyecto aportará evidencia sobre la implementación y la posible efectividad de una ruta de atención integrada para la depresión adolescente en un contexto con recursos limitados, útil para la práctica clínica, la política pública y futuros ensayos de mayor escala en Chile y América Latina.</p>
+      </li>
+    </ul>
+  </div>
+</section>
 
-  <h2>What is CARIBOU?</h2>
-  <p>
-    CARIBOU (Care for Adolescents who Receive Information 'Bout Outcomes) is an Integrated Care Pathway 
-    that provides structured, multidisciplinary, and measurement-based care for adolescents with depression.
-  </p>
+<section id="equipo">
+  <div class="section-inner">
+    <div class="title-bar">
+      <h2 class="section-title" data-es="Equipo" data-en="Team">Equipo</h2>
+    </div>
+    <p class="section-subtitle" data-es="Investigadores del proyecto y colaboración internacional" data-en="Project researchers and international collaboration">Investigadores del proyecto y colaboración internacional</p>
+    <div class="collab-wrap">
+      <div class="collab-box">
+        <h3>Jorge Gaete Olivares, MD, PhD</h3>
+        <div class="collab-sub" data-es="Investigador responsable · Universidad de los Andes" data-en="Principal investigator · Universidad de los Andes">Investigador responsable · Universidad de los Andes</div>
+        <p data-es="Estudió medicina en la Pontificia Universidad Católica de Chile, se formó como psiquiatra de adultos en la Universidad de Chile, es doctor en epidemiología psiquiátrica por la Universidad de Bristol e hizo un &lt;em&gt;Clinical Research Fellowship&lt;/em&gt; en psiquiatría infantil y del adolescente en King&#x27;s College London. Es Profesor Titular de la Escuela de Educación de la Universidad de los Andes y dirige el Centro de Investigación en Salud Mental Estudiantil (ISME). Su trabajo se centra en la prevención y el tratamiento de los problemas de salud mental de niños, niñas, adolescentes y adultos jóvenes, sobre todo en contextos educacionales. &lt;a href=&quot;https://jegaete.github.io&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Página personal&lt;/a&gt; · &lt;a href=&quot;https://investigadores.uandes.cl/es/persons/jorge-eduardo-gaete-olivares/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Perfil de investigador UAndes&lt;/a&gt;" data-en="He studied medicine at Pontificia Universidad Católica de Chile, trained as an adult psychiatrist at Universidad de Chile, holds a PhD in psychiatric epidemiology from the University of Bristol and completed a &lt;em&gt;Clinical Research Fellowship&lt;/em&gt; in child and adolescent psychiatry at King&#x27;s College London. He is Full Professor at the School of Education of Universidad de los Andes and directs the Research Centre for Student Mental Health (ISME). His work focuses on the prevention and treatment of mental health problems in children, adolescents and young adults, particularly in educational settings. &lt;a href=&quot;https://jegaete.github.io&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Personal website&lt;/a&gt; · &lt;a href=&quot;https://investigadores.uandes.cl/en/persons/jorge-eduardo-gaete-olivares/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;UAndes researcher profile&lt;/a&gt;">Estudió medicina en la Pontificia Universidad Católica de Chile, se formó como psiquiatra de adultos en la Universidad de Chile, es doctor en epidemiología psiquiátrica por la Universidad de Bristol e hizo un <em>Clinical Research Fellowship</em> en psiquiatría infantil y del adolescente en King's College London. Es Profesor Titular de la Escuela de Educación de la Universidad de los Andes y dirige el Centro de Investigación en Salud Mental Estudiantil (ISME). Su trabajo se centra en la prevención y el tratamiento de los problemas de salud mental de niños, niñas, adolescentes y adultos jóvenes, sobre todo en contextos educacionales. <a href="https://jegaete.github.io" target="_blank" rel="noopener">Página personal</a> · <a href="https://investigadores.uandes.cl/es/persons/jorge-eduardo-gaete-olivares/" target="_blank" rel="noopener">Perfil de investigador UAndes</a></p>
+      </div>
 
-  <p>The intervention includes:</p>
-  <ul>
-    <li>Structured clinical assessment and risk evaluation</li>
-    <li>Psychoeducation for adolescents and caregivers</li>
-    <li>Cognitive Behavioral Therapy (group and individual formats)</li>
-    <li>Caregiver support interventions</li>
-    <li>Evidence-based pharmacological treatment algorithms</li>
-    <li>Measurement-Based Care (MBC) with regular team reviews</li>
-    <li>Relapse prevention and continuity planning</li>
-  </ul>
+      <div class="collab-box">
+        <h3>Daniel Núñez, PhD</h3>
+        <div class="collab-sub" data-es="Coinvestigador · Universidad de Talca" data-en="Co-investigator · Universidad de Talca">Coinvestigador · Universidad de Talca</div>
+        <p data-es="Psicólogo y doctor en Ciencias Humanas. Profesor Asociado de la Facultad de Psicología de la Universidad de Talca, con trabajo en detección e intervención temprana en psicopatología y prevención de la conducta suicida en adolescentes." data-en="A psychologist with a PhD in Human Sciences. Associate Professor at the Faculty of Psychology of Universidad de Talca, working on early detection of and early intervention in psychopathology and on suicide prevention among adolescents.">Psicólogo y doctor en Ciencias Humanas. Profesor Asociado de la Facultad de Psicología de la Universidad de Talca, con trabajo en detección e intervención temprana en psicopatología y prevención de la conducta suicida en adolescentes.</p>
+      </div>
 
-  <hr>
+      <div class="collab-box">
+        <h3>Diego García-Huidobro, MD, PhD</h3>
+        <div class="collab-sub" data-es="Coinvestigador · Pontificia Universidad Católica de Chile" data-en="Co-investigator · Pontificia Universidad Católica de Chile">Coinvestigador · Pontificia Universidad Católica de Chile</div>
+        <p data-es="Médico de familia e investigador en salud familiar y atención primaria." data-en="A family physician and researcher in family health and primary care.">Médico de familia e investigador en salud familiar y atención primaria.</p>
+      </div>
 
-  <h2>Study Design</h2>
-  <p>
-    The project is conducted in two phases:
-  </p>
+      <div class="collab-box">
+        <h3>Vania Valenzuela, MD</h3>
+        <div class="collab-sub" data-es="Coinvestigadora · Pontificia Universidad Católica de Chile" data-en="Co-investigator · Pontificia Universidad Católica de Chile">Coinvestigadora · Pontificia Universidad Católica de Chile</div>
+        <p data-es="Médica con trabajo clínico y de investigación en atención primaria de salud." data-en="A physician working clinically and in research in primary health care.">Médica con trabajo clínico y de investigación en atención primaria de salud.</p>
+      </div>
 
-  <p><strong>Phase 1: Formative Work</strong></p>
-  <ul>
-    <li>Translation and cultural adaptation of CARIBOU materials</li>
-    <li>Youth and family engagement to enhance relevance and usability</li>
-  </ul>
+      <div class="collab-box">
+        <h3>Darren Courtney, MD, FRCPC</h3>
+        <div class="collab-sub" data-es="Colaborador internacional · CAMH y Universidad de Toronto, Canadá" data-en="International collaborator · CAMH and University of Toronto, Canada">Colaborador internacional · CAMH y Universidad de Toronto, Canadá</div>
+        <p data-es="Investigador principal de CARIBOU en el Cundill Centre for Child and Youth Depression del CAMH. Entrenó al equipo chileno y acompaña la adaptación cultural de los componentes de CARIBOU." data-en="Principal investigator of CARIBOU at the Cundill Centre for Child and Youth Depression, CAMH. He trained the Chilean team and supports the cultural adaptation of the CARIBOU components.">Investigador principal de CARIBOU en el Cundill Centre for Child and Youth Depression del CAMH. Entrenó al equipo chileno y acompaña la adaptación cultural de los componentes de CARIBOU.</p>
+      </div>
 
-  <p><strong>Phase 2: Intervention Evaluation</strong></p>
-  <ul>
-    <li>Pilot cluster Randomized Controlled Trial (cRCT)</li>
-    <li>72 adolescents with depression recruited from primary care centers</li>
-    <li>Comparison between CARIBOU and Treatment As Usual (TAU)</li>
-    <li>Follow-up period: 24 weeks</li>
-  </ul>
+    </div>
+    <p class="note" data-es="El equipo es multidisciplinario y reúne experiencia en psiquiatría del adolescente, atención primaria e implementación de intervenciones basadas en evidencia." data-en="The team is multidisciplinary and brings together expertise in adolescent psychiatry, primary care and the implementation of evidence-based interventions.">El equipo es multidisciplinario y reúne experiencia en psiquiatría del adolescente, atención primaria e implementación de intervenciones basadas en evidencia.</p>
+  </div>
+</section>
 
-  <hr>
+<section id="publicaciones" class="section-alt">
+  <div class="section-inner">
+    <div class="title-bar">
+      <h2 class="section-title" data-es="Publicaciones" data-en="Publications">Publicaciones</h2>
+    </div>
+    <p class="section-subtitle" data-es="Producción científica del proyecto y de sus líneas de trabajo" data-en="Scientific output of the project and its lines of work">Producción científica del proyecto y de sus líneas de trabajo</p>
+    <h3 class="pub-group" data-es="Resultados del proyecto CARIBOU" data-en="CARIBOU project outputs">Resultados del proyecto CARIBOU</h3>
+    <div class="pub-list">
+      <div class="pub-card" style="border-left-color: var(--accent);">
+        <div class="pub-year"><span data-es="En preparación" data-en="In preparation">En preparación</span></div>
+        <div class="pub-title">Evaluation of the acceptability, feasibility and exploration of the efficacy of an Integrated Care Pathway (CARIBOU) in adolescent depression in Chile</div>
+        <div class="pub-journal" data-es="Protocolo del estudio. El ensayo piloto aleatorizado por conglomerados está en curso." data-en="Study protocol. The pilot cluster randomised trial is under way.">Protocolo del estudio. El ensayo piloto aleatorizado por conglomerados está en curso.</div>
+      </div>
+    </div>
+    <h3 class="pub-group" data-es="Prevención del suicidio e intervenciones digitales" data-en="Suicide prevention and digital interventions">Prevención del suicidio e intervenciones digitales</h3>
+    <div class="pub-list">
+      <div class="pub-card">
+        <div class="pub-year">2026 · Archives of Suicide Research<span class="pub-badge">Open Access</span></div>
+        <div class="pub-title">Scaling Up a Blended Digital and Face-to-Face School-Based Suicide Prevention Program for Adolescents: A Quasi-Experimental Study of the Reframe-IT+ Intervention in Santiago, Chile</div>
+        <div class="pub-authors">Gaete J, Nuñez D, Ramírez S, Meza D, Robinson J</div>
+        <div class="pub-journal" data-es="Archives of Suicide Research (2026)" data-en="Archives of Suicide Research (2026)">Archives of Suicide Research (2026)</div>
+        <a href="https://doi.org/10.1080/13811118.2026.2672043" class="pub-link" target="_blank" rel="noopener">🔗 DOI: 10.1080/13811118.2026.2672043</a>
+      </div>
 
-  <h2>Objectives</h2>
-  <ul>
-    <li>Assess acceptability among adolescents, caregivers, and clinicians</li>
-    <li>Evaluate feasibility of implementation in primary care</li>
-    <li>Explore efficacy in reducing depressive and anxiety symptoms</li>
-    <li>Assess impact on quality of life, functioning, and family dynamics</li>
-  </ul>
+      <div class="pub-card">
+        <div class="pub-year">2026 · BMC Psychology<span class="pub-badge">Open Access</span></div>
+        <div class="pub-title">Evaluation of the effectiveness of Reframe-IT+ to prevent suicidal ideation and other mental health outcomes among adolescents in Chile: 3-month, 6-month and 10-month follow-up</div>
+        <div class="pub-authors">Gaete J, Meza D, Robinson J, Núñez D</div>
+        <div class="pub-journal" data-es="BMC Psychology (2026)" data-en="BMC Psychology (2026)">BMC Psychology (2026)</div>
+        <a href="https://doi.org/10.1186/s40359-026-05164-3" class="pub-link" target="_blank" rel="noopener">🔗 DOI: 10.1186/s40359-026-05164-3</a>
+      </div>
 
-  <hr>
+      <div class="pub-card">
+        <div class="pub-year">2025 · Prevention Science<span class="pub-badge">Open Access</span></div>
+        <div class="pub-title">Acceptability and Feasibility of a Blended School-Based Intervention to Prevent Suicidal Ideation Among Adolescents in Chile: Results from a Randomized Control Pilot Study</div>
+        <div class="pub-authors">Gaete J, Meza D, Andaur J, McKay S, Robinson J, Nuñez D</div>
+        <div class="pub-journal" data-es="Prevention Science (2025)" data-en="Prevention Science (2025)">Prevention Science (2025)</div>
+        <a href="https://doi.org/10.1007/s11121-025-01770-6" class="pub-link" target="_blank" rel="noopener">🔗 DOI: 10.1007/s11121-025-01770-6</a>
+      </div>
 
-  <h2>Setting</h2>
-  <p>
-    The study is conducted in primary care centers (CESFAMs) in the Metropolitan Region of Chile, 
-    including centers affiliated with the Pontificia Universidad Católica de Chile (ANCORA network).
-  </p>
+      <div class="pub-card">
+        <div class="pub-year">2025 · Pilot and Feasibility Studies<span class="pub-badge">Open Access</span></div>
+        <div class="pub-title">Acceptability and feasibility of Reframe-IT+U for suicidal ideation in university students: protocol of a quasi-experimental pilot study</div>
+        <div class="pub-authors">Gaete J, Núñez D, Romo V, Meza D, Robinson J, Araya R</div>
+        <div class="pub-journal" data-es="Pilot and Feasibility Studies (2025)" data-en="Pilot and Feasibility Studies (2025)">Pilot and Feasibility Studies (2025)</div>
+        <a href="https://doi.org/10.1186/s40814-025-01738-x" class="pub-link" target="_blank" rel="noopener">🔗 DOI: 10.1186/s40814-025-01738-x</a>
+      </div>
 
-  <hr>
+      <div class="pub-card">
+        <div class="pub-year">2024 · BMC Psychology<span class="pub-badge">Open Access</span></div>
+        <div class="pub-title">Reframe-IT+, an indicated preventive school-based intervention, reduces suicidal ideation among adolescents in vulnerable contexts in Chile</div>
+        <div class="pub-authors">Nuñez D, Meza D, Andaur J, Robinson J, Gaete J</div>
+        <div class="pub-journal" data-es="BMC Psychology (2024)" data-en="BMC Psychology (2024)">BMC Psychology (2024)</div>
+        <a href="https://doi.org/10.1186/s40359-024-02300-9" class="pub-link" target="_blank" rel="noopener">🔗 DOI: 10.1186/s40359-024-02300-9</a>
+      </div>
 
-  <h2>Research Team</h2>
+    </div>
+    <h3 class="pub-group" data-es="Mecanismos de la ideación suicida" data-en="Mechanisms of suicidal ideation">Mecanismos de la ideación suicida</h3>
+    <div class="pub-list">
+      <div class="pub-card">
+        <div class="pub-year">2026 · BMC Psychology<span class="pub-badge">Open Access</span></div>
+        <div class="pub-title">Heterogeneous trajectories of suicidal ideation and depressive symptoms during an indicated school-based CBT intervention: a group-based trajectory modeling study</div>
+        <div class="pub-authors">Gaete J, Martínez P, Robinson J, Núñez D</div>
+        <div class="pub-journal" data-es="BMC Psychology (2026)" data-en="BMC Psychology (2026)">BMC Psychology (2026)</div>
+        <a href="https://doi.org/10.1186/s40359-026-04644-w" class="pub-link" target="_blank" rel="noopener">🔗 DOI: 10.1186/s40359-026-04644-w</a>
+      </div>
 
-<p><strong>Principal Investigator</strong></p>
-<ul>
-  <li>Jorge Gaete Olivares, MD, PhD – Universidad de los Andes, Chile</li>
-</ul>
-<p>He studied medicine at Pontificia Universidad Católica de Chile, trained as an adult psychiatrist at Universidad de Chile, holds a PhD in psychiatric epidemiology from the University of Bristol and completed a Clinical Research Fellowship in child and adolescent psychiatry at King's College London. He is Full Professor at the School of Education of Universidad de los Andes and directs the Research Centre for Student Mental Health (ISME). His work focuses on the prevention and treatment of mental health problems in children, adolescents and young adults, particularly in educational settings.</p>
-<p><a href="https://jegaete.github.io">Personal website</a> · <a href="https://investigadores.uandes.cl/en/persons/jorge-eduardo-gaete-olivares/">UAndes researcher profile</a></p>
+      <div class="pub-card">
+        <div class="pub-year">2025 · Journal of Affective Disorders<span class="pub-badge">Open Access</span></div>
+        <div class="pub-title">The underlying dynamics of a suicidal ideation latent network model: The role of hopelessness, psychopathology, emotion regulation, and behavioral coping skills in adolescents from the general population</div>
+        <div class="pub-authors">Villacura-Herrera C, Ávalos-Tejeda M, Gaete J, Robinson J, Núñez D</div>
+        <div class="pub-journal" data-es="Journal of Affective Disorders (2025)" data-en="Journal of Affective Disorders (2025)">Journal of Affective Disorders (2025)</div>
+        <a href="https://doi.org/10.1016/j.jad.2025.02.101" class="pub-link" target="_blank" rel="noopener">🔗 DOI: 10.1016/j.jad.2025.02.101</a>
+      </div>
 
-<p><strong>Co-Investigators</strong></p>
-<ul>
-  <li>Daniel Núñez, PhD – Universidad de Talca, Chile</li>
-  <li>Diego García-Huidobro, MD, PhD – Pontificia Universidad Católica de Chile</li>
-  <li>Vania Valenzuela, MD – Pontificia Universidad Católica de Chile</li>
-</ul>
+    </div>
+    <h3 class="pub-group" data-es="Implementación de intervenciones basadas en evidencia en Chile" data-en="Implementation of evidence-based interventions in Chile">Implementación de intervenciones basadas en evidencia en Chile</h3>
+    <div class="pub-list">
+      <div class="pub-card">
+        <div class="pub-year">2025 · BMC Public Health<span class="pub-badge">Open Access</span></div>
+        <div class="pub-title">Acceptability, feasibility, fidelity and quality implementation of the culturally adapted version of the Social Competence Promotion Program among Young Adolescents (“Mi Mejor Plan”) to prevent substance use among adolescents in Chile: a pilot randomized control study</div>
+        <div class="pub-authors">Ramírez S, Ríos N, Rojas-Barahona CA, Cárcamo M, Sepúlveda-Peñaloza A, Araya R, Gaete J</div>
+        <div class="pub-journal" data-es="BMC Public Health (2025)" data-en="BMC Public Health (2025)">BMC Public Health (2025)</div>
+        <a href="https://doi.org/10.1186/s12889-025-23033-3" class="pub-link" target="_blank" rel="noopener">🔗 DOI: 10.1186/s12889-025-23033-3</a>
+      </div>
 
-<p><strong>International Collaborator</strong></p>
-<ul>
-  <li>Darren Courtney, MD – University of Toronto / CAMH, Canada</li>
-</ul>
+      <div class="pub-card">
+        <div class="pub-year">2024 · BMC Public Health<span class="pub-badge">Open Access</span></div>
+        <div class="pub-title">Acceptability, feasibility and fidelity of the culturally adapted version of Unplugged to prevent substance use among adolescents in Chile</div>
+        <div class="pub-authors">Salgado G, Gaete J, Gana S, Valenzuela D, Araya R</div>
+        <div class="pub-journal" data-es="BMC Public Health (2024)" data-en="BMC Public Health (2024)">BMC Public Health (2024)</div>
+        <a href="https://doi.org/10.1186/s12889-024-19499-2" class="pub-link" target="_blank" rel="noopener">🔗 DOI: 10.1186/s12889-024-19499-2</a>
+      </div>
 
-<p>
-  The project is conducted by a multidisciplinary team with expertise in adolescent psychiatry, 
-  primary care, and implementation of evidence-based interventions, combining clinical, research, 
-  and international collaboration capacities.
-</p>
+    </div>
+    <p class="note" data-es="Próximos productos: resultados del ensayo, estudio de implementación en atención primaria, análisis de costo-efectividad e informes de difusión y política pública." data-en="Future outputs: trial results, an implementation study in primary care, a cost-effectiveness analysis, and dissemination and policy reports.">Próximos productos: resultados del ensayo, estudio de implementación en atención primaria, análisis de costo-efectividad e informes de difusión y política pública.</p>
+  </div>
+</section>
 
-  <hr>
 
-  <h2>Status</h2>
-  <p>
-    The project is currently in the implementation phase. This website will be updated with study 
-    progress, publications, and resources.
-  </p>
-</main>
+<!-- ════════════════ CONTACT ════════════════ -->
+<section id="contacto" class="section-alt">
+  <div class="section-inner">
+    <div class="title-bar">
+      <h2 class="section-title" data-es="Contacto" data-en="Contact">Contacto</h2>
+    </div>
+    <p class="section-subtitle" data-es="Información de contacto e instituciones financiadoras" data-en="Contact information and funding institutions">Información de contacto e instituciones financiadoras</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-detail">
+          <span class="c-icon">👤</span>
+          <div>
+            <strong>Jorge Gaete</strong><br/>
+            <span style="font-size:0.88rem; color:var(--text-muted);" data-es="Psiquiatra e investigador en salud mental" data-en="Psychiatrist and mental health researcher">Psiquiatra e investigador en salud mental</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <span class="c-icon">🏛️</span>
+          <div style="font-size:0.9rem;">
+            <span data-es="&lt;a href=&quot;https://www.ismeuandes.cl&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Centro de Investigación en Salud Mental Estudiantil (ISME)&lt;/a&gt;" data-en="&lt;a href=&quot;https://www.ismeuandes.cl&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Research Centre for Student Mental Health (ISME)&lt;/a&gt;"><a href="https://www.ismeuandes.cl" target="_blank" rel="noopener">Centro de Investigación en Salud Mental Estudiantil (ISME)</a></span><br/>
+            <span data-es="Escuela de Educación, Facultad de Ciencias Sociales" data-en="School of Education, Faculty of Social Sciences">Escuela de Educación, Facultad de Ciencias Sociales</span><br/>
+            Universidad de los Andes, Chile
+          </div>
+        </div>
+        <div class="contact-detail">
+          <span class="c-icon">🌐</span>
+          <div style="font-size:0.9rem;">
+            <a href="https://jegaete.github.io" target="_blank" rel="noopener">jegaete.github.io</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <span class="c-icon">📬</span>
+          <div>
+            <a href="https://www.ismeuandes.cl/contacto/" target="_blank" rel="noopener" style="font-size:0.9rem;">ismeuandes.cl/contacto</a>
+          </div>
+        </div>
+      </div>
+      <div class="funding-box">
+        <h3 data-es="Financiamiento" data-en="Funding">Financiamiento</h3>
+        <div class="funder-row">
+          <div class="funder-dot"></div>
+          <div>
+            <strong data-es="ANID – FONDECYT Regular" data-en="ANID – FONDECYT Regular">ANID – FONDECYT Regular</strong><br/>
+            <span style="font-size:0.82rem; color:var(--text-muted);" data-es="Proyecto Nº 1261819 · 2026–2031 · IR: Jorge Gaete" data-en="Project Nº 1261819 · 2026–2031 · PI: Jorge Gaete">Proyecto Nº 1261819 · 2026–2031 · IR: Jorge Gaete</span>
+          </div>
+        </div>
+        <div class="funder-row">
+          <div class="funder-dot"></div>
+          <div>
+            <strong data-es="Fundación Crecer y Sanar" data-en="Fundación Crecer y Sanar">Fundación Crecer y Sanar</strong><br/>
+            <span style="font-size:0.82rem; color:var(--text-muted);" data-es="Cofinancia el estudio escolar de Reframe-IT+ y CARIBOU (2026)" data-en="Co-funds the school study of Reframe-IT+ and CARIBOU (2026)">Cofinancia el estudio escolar de Reframe-IT+ y CARIBOU (2026)</span>
+          </div>
+        </div>
+        <hr style="border:none; border-top:1px solid var(--border); margin:1rem 0;"/>
+        <p style="font-size:0.85rem; color:var(--text-muted);" data-es="Para consultas sobre el proyecto, puede contactarnos a través del sitio web del &lt;a href=&#x27;https://www.ismeuandes.cl/contacto/&#x27; target=&#x27;_blank&#x27; rel=&#x27;noopener&#x27;&gt;ISME&lt;/a&gt;." data-en="For inquiries about the project, please contact us through the &lt;a href=&#x27;https://www.ismeuandes.cl/contacto/&#x27; target=&#x27;_blank&#x27; rel=&#x27;noopener&#x27;&gt;ISME website&lt;/a&gt;.">Para consultas sobre el proyecto, puede contactarnos a través del sitio web del <a href='https://www.ismeuandes.cl/contacto/' target='_blank' rel='noopener'>ISME</a>.</p>
+        <div style="display:flex; gap:0.7rem; flex-wrap:wrap; margin-top:1rem;">
+          <a href="https://jegaete.github.io/crecer-y-sanar/" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:0.8rem; padding:0.5rem 1rem;">Reframe-IT+ &amp; CARIBOU</a>
+          <a href="https://www.cariboupathwayresearch.com" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.8rem; padding:0.5rem 1rem; border-color:var(--accent); color:var(--accent);">CARIBOU by CAMH</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ════════════════ FOOTER ════════════════ -->
 <footer>
-  CARIBOU Project · Chile · Integrated Care Pathway for Adolescent Depression
+  <p>
+    <span data-es="Proyecto CARIBOU · Chile · Ruta de atención integrada para la depresión adolescente" data-en="CARIBOU Project · Chile · Integrated care pathway for adolescent depression">Proyecto CARIBOU · Chile · Ruta de atención integrada para la depresión adolescente</span>
+    &nbsp;·&nbsp;
+    <a href="https://jegaete.github.io" target="_blank" rel="noopener">jegaete.github.io</a>
+  </p>
+  <p style="margin-top:0.4rem; font-size:0.75rem; opacity:0.6;">
+    <span data-es="CARIBOU fue desarrollado por el Cundill Centre for Child and Youth Depression, CAMH, Toronto." data-en="CARIBOU was developed by the Cundill Centre for Child and Youth Depression, CAMH, Toronto.">CARIBOU fue desarrollado por el Cundill Centre for Child and Youth Depression, CAMH, Toronto.</span>
+  </p>
 </footer>
+
+<script>
+  let currentLang = 'es';
+  function toggleLang() { currentLang = currentLang === 'es' ? 'en' : 'es'; applyLang(); }
+  function applyLang() {
+    const btn = document.getElementById('langToggle');
+    btn.textContent = currentLang === 'es' ? 'EN' : 'ES';
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('[data-es]').forEach(el => {
+      const text = el.getAttribute('data-' + currentLang);
+      if (!text) return;
+      if (text.includes('<') || text.includes('&lt;')) {
+        el.innerHTML = text.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      } else {
+        el.textContent = text;
+      }
+    });
+  }
+  function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+</script>
 </body>
 </html>
